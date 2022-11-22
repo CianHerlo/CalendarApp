@@ -14,7 +14,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/event_name"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/colorForeground"
         android:textSize="20sp" />
 
     <EditText
@@ -26,6 +26,7 @@
         android:ems="10"
         android:hint="@string/event_name"
         android:inputType="text"
+        android:textColor="?android:attr/colorForeground"
         android:textSize="20sp" />
 
     <TextView
@@ -36,7 +37,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/date"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/colorForeground"
         android:textSize="20sp" />
 
     <TextView
@@ -47,7 +48,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/time"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/colorForeground"
         android:textSize="20sp" />
 
     <Button
