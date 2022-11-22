@@ -13,9 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:contentDescription="@string/daily_button"
         android:onClick="dailyAction"
         android:text="@string/daily"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/colorForeground"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -31,20 +32,22 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/back_button"
             android:onClick="lastWeek"
-            android:textColor="@color/black"
+            android:textColor="?android:attr/colorForeground"
             android:textStyle="bold"
             app:icon="@drawable/ic_back_arrow"
             app:iconGravity="end"
-            app:iconTint="@color/black" />
+            app:iconTint="?android:attr/colorForeground" />
 
         <TextView
             android:id="@+id/monthYearTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
+            android:text="Month &amp; Year"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="?android:attr/colorForeground"
             android:textSize="20sp" />
 
         <Button
@@ -53,12 +56,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/forward_button"
             android:onClick="nextWeek"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:icon="@drawable/ic_forward_arrow"
             app:iconGravity="start"
-            app:iconTint="@color/black" />
+            app:iconTint="?android:attr/colorForeground" />
 
     </LinearLayout>
 
@@ -73,7 +77,7 @@
             android:layout_weight="1"
             android:text="@string/sunday"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="?android:attr/colorForeground"
             android:textSize="16sp" />
 
         <TextView
@@ -82,7 +86,7 @@
             android:layout_weight="1"
             android:text="@string/monday"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="?android:attr/colorForeground"
             android:textSize="16sp" />
 
         <TextView
@@ -91,7 +95,7 @@
             android:layout_weight="1"
             android:text="@string/tuesday"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="?android:attr/colorForeground"
             android:textSize="16sp" />
 
         <TextView
@@ -100,7 +104,7 @@
             android:layout_weight="1"
             android:text="@string/wednesday"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="?android:attr/colorForeground"
             android:textSize="16sp" />
 
         <TextView
@@ -109,7 +113,7 @@
             android:layout_weight="1"
             android:text="@string/thursday"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="?android:attr/colorForeground"
             android:textSize="16sp" />
 
         <TextView
@@ -118,7 +122,7 @@
             android:layout_weight="1"
             android:text="@string/friday"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="?android:attr/colorForeground"
             android:textSize="16sp" />
 
         <TextView
@@ -127,7 +131,7 @@
             android:layout_weight="1"
             android:text="@string/saturday"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="?android:attr/colorForeground"
             android:textSize="16sp" />
 
 
@@ -147,7 +151,7 @@
         android:layout_gravity="center"
         android:onClick="newEventAction"
         android:text="@string/new_event"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/colorForeground"
         android:textSize="20sp"
         android:textStyle="bold" />
 

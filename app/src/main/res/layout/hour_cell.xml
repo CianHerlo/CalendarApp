@@ -6,13 +6,13 @@
     android:layout_height="60dp">
 
     <TextView
+        android:id="@+id/timeTV"
         android:layout_width="70dp"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:id="@+id/timeTV"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:text=""/>
+        android:text="Time"
+        android:textColor="?android:attr/colorForeground"
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,40 +20,40 @@
         android:padding="5dp">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
             android:id="@+id/event1"
-            android:textSize="12sp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:gravity="center"
             android:lines="2"
-            android:textColor="@color/black"
-            android:text=""/>
+            android:text="Event Name"
+            android:textColor="?android:attr/colorForeground"
+            android:textSize="12sp" />
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
             android:id="@+id/event2"
-            android:textSize="12sp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:gravity="center"
             android:lines="2"
-            android:textColor="@color/black"
-            android:text=""/>
+            android:text=""
+            android:textColor="?android:attr/colorForeground"
+            android:textSize="12sp" />
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
             android:id="@+id/event3"
-            android:textSize="12sp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:gravity="center"
             android:lines="2"
-            android:textColor="@color/black"
-            android:text=""/>
+            android:text=""
+            android:textColor="?android:attr/colorForeground"
+            android:textSize="12sp" />
 
     </LinearLayout>
 
