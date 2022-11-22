@@ -1,3 +1,32 @@
 <resources>
-    <string name="app_name">CalendarApp</string>
+    <string name="app_name">Calendar</string>
+    <string name="event_name">Event Name</string>
+    <string name="new_event">Create Event</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="save">Save</string>
+
+    <string name="monthly">Monthly</string>
+    <string name="weekly">Weekly</string>
+    <string name="daily">Daily</string>
+    <string name="sunday">SUN</string>
+    <string name="monday">MON</string>
+    <string name="tuesday">TUE</string>
+    <string name="wednesday">WED</string>
+    <string name="thursday">THUR</string>
+    <string name="friday">FRI</string>
+    <string name="saturday">SAT</string>
+
+
+    <!-- Input Field Hints -->
+    <string name="event_name_input">Event Name Input Field</string>
+
+
+    <!-- Input Field Hints -->
+    <string name="monthly_button">Button Labelled Monthly will change view to show selected Month</string>
+    <string name="weekly_button">Button Labelled Weekly will change view to show selected Week</string>
+    <string name="daily_button">Button Labelled Daily will change view to show selected Day</string>
+
+    <string name="forward_button">Switches to Next Month, Week or Day in View</string>
+    <string name="back_button">Switches to Previous Month, Week or Day in View</string>
 </resources>
