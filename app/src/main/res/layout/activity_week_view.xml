@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".WeekViewActivity">
 
     <Button
-        android:id="@+id/weeklyBTN"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:contentDescription="@string/weekly_button"
-        android:onClick="weeklyAction"
-        android:text="@string/weekly"
-        android:textColor="?android:attr/colorForeground"
+        android:onClick="dailyAction"
+        android:text="@string/daily"
+        android:textColor="@color/black"
         android:textSize="20sp"
-        android:textStyle="bold"
-        tools:ignore="RedundantDescriptionCheck" />
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:orientation="horizontal">
 
         <Button
@@ -32,22 +31,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:contentDescription="@string/back_button"
-            android:onClick="lastMonth"
-            android:textColor="?android:attr/colorForeground"
+            android:onClick="lastWeek"
+            android:textColor="@color/black"
             android:textStyle="bold"
             app:icon="@drawable/ic_back_arrow"
             app:iconGravity="end"
-            app:iconTint="?android:attr/colorForeground" />
+            app:iconTint="@color/black" />
 
         <TextView
             android:id="@+id/monthYearTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Month &amp; Year"
             android:textAlignment="center"
-            android:textColor="?android:attr/colorForeground"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <Button
@@ -56,15 +53,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:contentDescription="@string/forward_button"
-            android:drawableTint="?android:attr/colorForeground"
-            android:drawableTintMode="src_in"
-            android:onClick="nextMonth"
-            android:textColor="?android:attr/colorForeground"
+            android:onClick="nextWeek"
+            android:textColor="@color/black"
             android:textStyle="bold"
             app:icon="@drawable/ic_forward_arrow"
             app:iconGravity="start"
-            app:iconTint="?android:attr/colorForeground" />
+            app:iconTint="@color/black" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -78,7 +73,7 @@
             android:layout_weight="1"
             android:text="@string/sunday"
             android:textAlignment="center"
-            android:textColor="?android:attr/colorForeground"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView
@@ -87,7 +82,7 @@
             android:layout_weight="1"
             android:text="@string/monday"
             android:textAlignment="center"
-            android:textColor="?android:attr/colorForeground"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView
@@ -96,7 +91,7 @@
             android:layout_weight="1"
             android:text="@string/tuesday"
             android:textAlignment="center"
-            android:textColor="?android:attr/colorForeground"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView
@@ -105,7 +100,7 @@
             android:layout_weight="1"
             android:text="@string/wednesday"
             android:textAlignment="center"
-            android:textColor="?android:attr/colorForeground"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView
@@ -114,7 +109,7 @@
             android:layout_weight="1"
             android:text="@string/thursday"
             android:textAlignment="center"
-            android:textColor="?android:attr/colorForeground"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView
@@ -123,7 +118,7 @@
             android:layout_weight="1"
             android:text="@string/friday"
             android:textAlignment="center"
-            android:textColor="?android:attr/colorForeground"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView
@@ -132,20 +127,48 @@
             android:layout_weight="1"
             android:text="@string/saturday"
             android:textAlignment="center"
-            android:textColor="?android:attr/colorForeground"
+            android:textColor="@color/black"
             android:textSize="16sp" />
+
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/calendarRV"
+        android:id="@+id/calendarRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
-    </LinearLayout>
+    <Button
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="newEventAction"
+        android:text="@string/new_event"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/eventListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"/>
+
 
 </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
