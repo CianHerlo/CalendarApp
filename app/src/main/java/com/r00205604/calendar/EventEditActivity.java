@@ -8,14 +8,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 
 public class EventEditActivity extends AppCompatActivity
 {
-    private EditText eventNameET;
-
-    private LocalTime time;
+    private EditText eventNameET, eventTimeET;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -26,17 +27,21 @@ public class EventEditActivity extends AppCompatActivity
         eventNameET = findViewById(R.id.eventNameET);
         TextView eventDateTV = findViewById(R.id.eventDateTV);
         TextView eventTimeTV = findViewById(R.id.eventTimeTV);
+        eventTimeET = findViewById(R.id.eventTimeET);
 
-        time = LocalTime.now();
-        eventDateTV.setText("Date: " + CalendarUtils.formattedDate(CalendarUtils.selectedDate));
-        eventTimeTV.setText("Time: " + CalendarUtils.formattedTime(time));
+        eventDateTV.setText("Selected Date: " + CalendarUtils.formattedDate(CalendarUtils.selectedDate));
     }
 
     public void saveEventAction(View view)
     {
         String eventName = eventNameET.getText().toString();
-        com.r00205604.calendar.Event newEvent = new com.r00205604.calendar.Event(eventName, CalendarUtils.selectedDate, time);
-        com.r00205604.calendar.Event.eventsList.add(newEvent);
+        eventTimeET = findViewById(R.id.eventTimeET);
+
+        String time = eventTimeET.getText().toString();
+        LocalTime convertTime = LocalTime.parse(time);
+
+        Event newEvent = new Event(eventName, CalendarUtils.selectedDate, convertTime);
+        Event.eventsList.add(newEvent);
         finish();
     }
 }

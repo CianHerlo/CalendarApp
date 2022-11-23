@@ -5,12 +5,16 @@
     <!--  Common Strings  -->
     <string name="event_name">Event Name</string>
     <string name="new_event">Create Event</string>
-    <string name="date">Date</string>
+    <string name="date">Selected Date</string>
     <string name="time">Time</string>
     <string name="save">Save</string>
     <string name="login">Login | Register</string>
+    <string name="login_button">Login</string>
+    <string name="register_button">Register</string>
     <string name="email_label">Email</string>
+    <string name="email_autofill">Email Address Input</string>
     <string name="password_label">Password</string>
+    <string name="password_autofill">Password Input</string>
 
 
     <!-- Days, Months, Years -->
@@ -30,6 +34,8 @@
     <string name="event_name_input">Event Name Input Field</string>
     <string name="email_hint">email@email.com</string>
     <string name="password_hint">Password</string>
+    <string name="date_hint">2022-dec-25</string>
+    <string name="time_hint">13:00</string>
 
 
     <!-- Button Descriptions -->
@@ -39,4 +45,9 @@
 
     <string name="forward_button">Switches to Next Month, Week or Day in View</string>
     <string name="back_button">Switches to Previous Month, Week or Day in View</string>
+
+
+    <!--  Image Descriptions  -->
+    <string name="email_image">Image of Email Icon</string>
+    <string name="password_image">Image of Password Icon</string>
 </resources>
