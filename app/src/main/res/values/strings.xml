@@ -1,11 +1,19 @@
 <resources>
+    <!--  Application Name  -->
     <string name="app_name">Calendar</string>
+
+    <!--  Common Strings  -->
     <string name="event_name">Event Name</string>
     <string name="new_event">Create Event</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
     <string name="save">Save</string>
+    <string name="login">Login | Register</string>
+    <string name="email_label">Email</string>
+    <string name="password_label">Password</string>
 
+
+    <!-- Days, Months, Years -->
     <string name="monthly">Monthly</string>
     <string name="weekly">Weekly</string>
     <string name="daily">Daily</string>
@@ -20,9 +28,11 @@
 
     <!-- Input Field Hints -->
     <string name="event_name_input">Event Name Input Field</string>
+    <string name="email_hint">email@email.com</string>
+    <string name="password_hint">Password</string>
 
 
-    <!-- Input Field Hints -->
+    <!-- Button Descriptions -->
     <string name="monthly_button">Button Labelled Monthly will change view to show selected Month</string>
     <string name="weekly_button">Button Labelled Weekly will change view to show selected Week</string>
     <string name="daily_button">Button Labelled Daily will change view to show selected Day</string>
