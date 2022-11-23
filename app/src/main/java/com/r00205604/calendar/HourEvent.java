@@ -3,13 +3,11 @@ package com.r00205604.calendar;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-class HourEvent
-{
+class HourEvent {
     LocalTime time;
     ArrayList<com.r00205604.calendar.Event> events;
 
-    public HourEvent(LocalTime time, ArrayList<com.r00205604.calendar.Event> events)
-    {
+    public HourEvent(LocalTime time, ArrayList<com.r00205604.calendar.Event> events) {
         this.time = time;
         this.events = events;
     }
@@ -24,13 +22,4 @@ class HourEvent
         this.time = time;
     }
 
-    public ArrayList<com.r00205604.calendar.Event> getEvents()
-    {
-        return events;
-    }
-
-    public void setEvents(ArrayList<com.r00205604.calendar.Event> events)
-    {
-        this.events = events;
-    }
 }

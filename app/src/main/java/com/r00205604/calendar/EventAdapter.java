@@ -12,21 +12,19 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class EventAdapter extends ArrayAdapter<com.r00205604.calendar.Event>
-{
-    public EventAdapter(@NonNull Context context, List<com.r00205604.calendar.Event> events)
-    {
+public class EventAdapter extends ArrayAdapter<com.r00205604.calendar.Event> {
+    public EventAdapter(@NonNull Context context, List<com.r00205604.calendar.Event> events) {
         super(context, 0, events);
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent)
-    {
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         com.r00205604.calendar.Event event = getItem(position);
 
-        if (convertView == null)
+        if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.event_cell, parent, false);
+        }
 
         TextView eventCellTV = convertView.findViewById(R.id.eventCellTV);
 

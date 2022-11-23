@@ -14,8 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
 
-public class EventEditActivity extends AppCompatActivity
-{
+public class EventEditActivity extends AppCompatActivity {
     private EditText eventNameET, eventTimeET;
 
     @SuppressLint("SetTextI18n")
@@ -26,19 +25,26 @@ public class EventEditActivity extends AppCompatActivity
 
         eventNameET = findViewById(R.id.eventNameET);
         TextView eventDateTV = findViewById(R.id.eventDateTV);
-        TextView eventTimeTV = findViewById(R.id.eventTimeTV);
         eventTimeET = findViewById(R.id.eventTimeET);
 
         eventDateTV.setText("Selected Date: " + CalendarUtils.formattedDate(CalendarUtils.selectedDate));
     }
 
-    public void saveEventAction(View view)
-    {
+    public void saveEventAction(View view) {
         String eventName = eventNameET.getText().toString();
         eventTimeET = findViewById(R.id.eventTimeET);
 
         String time = eventTimeET.getText().toString();
         LocalTime convertTime = LocalTime.parse(time);
+
+        if (eventName == "" || time == "") {
+            if (eventName == "") {
+                eventNameET.setError("Event Name Required");
+            } else {
+                eventTimeET.setError("Event Time Required");
+            }
+            return;
+        }
 
         Event newEvent = new Event(eventName, CalendarUtils.selectedDate, convertTime);
         Event.eventsList.add(newEvent);

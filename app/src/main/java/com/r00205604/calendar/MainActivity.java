@@ -15,15 +15,14 @@ import android.widget.TextView;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener
-{
+public class MainActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener {
+
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -34,8 +33,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         setMonthView();
     }
 
-    private void setMonthView()
-    {
+    private void setMonthView() {
         monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
         ArrayList<LocalDate> daysInMonth = daysInMonthArray();
 
@@ -45,23 +43,19 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         calendarRecyclerView.setAdapter(calendarAdapter);
     }
 
-    public void lastMonth(View view)
-    {
+    public void lastMonth(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusMonths(1);
         setMonthView();
     }
 
-    public void nextMonth(View view)
-    {
+    public void nextMonth(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusMonths(1);
         setMonthView();
     }
 
     @Override
-    public void onItemClick(int position, LocalDate date)
-    {
-        if(date != null)
-        {
+    public void onItemClick(int position, LocalDate date) {
+        if(date != null) {
             CalendarUtils.selectedDate = date;
             setMonthView();
         }
