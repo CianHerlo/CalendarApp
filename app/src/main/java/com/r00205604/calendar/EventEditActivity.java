@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
@@ -31,6 +33,8 @@ public class EventEditActivity extends AppCompatActivity {
     }
 
     public void saveEventAction(View view) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
         String eventName = eventNameET.getText().toString();
         eventTimeET = findViewById(R.id.eventTimeET);
 
