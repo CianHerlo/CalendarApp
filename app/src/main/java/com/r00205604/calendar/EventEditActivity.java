@@ -1,5 +1,6 @@
 package com.r00205604.calendar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -10,7 +11,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -52,6 +56,16 @@ public class EventEditActivity extends AppCompatActivity {
 
         Event newEvent = new Event(eventName, CalendarUtils.selectedDate, convertTime);
         Event.eventsList.add(newEvent);
+
+        db.collection("events")
+                        .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                                    }
+                                });
+
         finish();
     }
 }
