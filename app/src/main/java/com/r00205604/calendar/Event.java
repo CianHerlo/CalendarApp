@@ -28,7 +28,6 @@ public class Event {
                 events.add(event);
             }
         }
-
         return events;
     }
 

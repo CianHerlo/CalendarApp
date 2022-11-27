@@ -30,6 +30,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        loadEvents();
 
         calendarRecyclerView = findViewById(R.id.calendarRV);
         monthYearText = findViewById(R.id.monthYearTV);
@@ -67,8 +70,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
 
                         assert email != null;
                         if (email.equals(fireAuth.getCurrentUser().getEmail())) {
-                            Log.d(TAG, "User Exists");
-                            Toast.makeText(MainActivity.this, "Email Exists", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "Welcome Back");
                             userExists = 1;
                             break;
                         }
@@ -81,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
                         // Create a new user with a first and last name
                         Map<String, Object> user = new HashMap<>();
                         user.put("email", fireAuth.getCurrentUser().getEmail());
-                        user.put("events", new ArrayList<Event>());
 
                         // Add a new document with a generated ID
                         db.collection("users")
@@ -92,6 +93,44 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
                 }
             }
         });
+    }
+
+    private void loadEvents() {
+        CollectionReference usersRef = db.collection("users");
+        Query query = usersRef.whereEqualTo("email", fireAuth.getCurrentUser().getEmail());
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                        String email = documentSnapshot.getString("email");
+
+                        assert email != null;
+                        if (email.equals(fireAuth.getCurrentUser().getEmail())) {
+                            String userID = documentSnapshot.getId();
+
+                            CollectionReference eventsRef = db.collection("users").document(userID).collection("events");
+                            eventsRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        for (DocumentSnapshot documentSnapshot1 : task.getResult()) {
+                                            String eventTitle = documentSnapshot1.getString("title");
+                                            LocalDate eventDate = LocalDate.parse(documentSnapshot1.getString("date"));
+                                            LocalTime eventTime = LocalTime.parse(documentSnapshot1.getString("time"));
+
+                                            Event event = new Event(eventTitle, eventDate, eventTime);
+                                            eventsList.add(event);
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+        });
+        return;
     }
 
     private void setMonthView() {
