@@ -34,6 +34,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener {
 
@@ -49,8 +50,6 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        loadEvents();
-
         calendarRecyclerView = findViewById(R.id.calendarRV);
         monthYearText = findViewById(R.id.monthYearTV);
         db = FirebaseFirestore.getInstance();
@@ -58,9 +57,10 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
 
         CalendarUtils.selectedDate = LocalDate.now();
         setMonthView();
+        loadEvents();
 
         CollectionReference usersRef = db.collection("users");
-        Query query = usersRef.whereEqualTo("email", fireAuth.getCurrentUser().getEmail());
+        Query query = usersRef.whereEqualTo("email", Objects.requireNonNull(fireAuth.getCurrentUser()).getEmail());
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -96,41 +96,35 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
     }
 
     private void loadEvents() {
+        eventsList.clear();
         CollectionReference usersRef = db.collection("users");
         Query query = usersRef.whereEqualTo("email", fireAuth.getCurrentUser().getEmail());
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (DocumentSnapshot documentSnapshot : task.getResult()) {
-                        String email = documentSnapshot.getString("email");
+        query.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                    String email = documentSnapshot.getString("email");
 
-                        assert email != null;
-                        if (email.equals(fireAuth.getCurrentUser().getEmail())) {
-                            String userID = documentSnapshot.getId();
+                    assert email != null;
+                    if (email.equals(fireAuth.getCurrentUser().getEmail())) {
+                        String userID = documentSnapshot.getId();
 
-                            CollectionReference eventsRef = db.collection("users").document(userID).collection("events");
-                            eventsRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        for (DocumentSnapshot documentSnapshot1 : task.getResult()) {
-                                            String eventTitle = documentSnapshot1.getString("title");
-                                            LocalDate eventDate = LocalDate.parse(documentSnapshot1.getString("date"));
-                                            LocalTime eventTime = LocalTime.parse(documentSnapshot1.getString("time"));
+                        CollectionReference eventsRef = db.collection("users").document(userID).collection("events");
+                        eventsRef.get().addOnCompleteListener(task1 -> {
+                            if (task1.isSuccessful()) {
+                                for (DocumentSnapshot documentSnapshot1 : task1.getResult()) {
+                                    String eventTitle = documentSnapshot1.getString("title");
+                                    LocalDate eventDate = LocalDate.parse(documentSnapshot1.getString("date"));
+                                    LocalTime eventTime = LocalTime.parse(documentSnapshot1.getString("time"));
 
-                                            Event event = new Event(eventTitle, eventDate, eventTime);
-                                            eventsList.add(event);
-                                        }
-                                    }
+                                    Event event = new Event(eventTitle, eventDate, eventTime);
+                                    eventsList.add(event);
                                 }
-                            });
-                        }
+                            }
+                        });
                     }
                 }
             }
         });
-        return;
     }
 
     private void setMonthView() {
