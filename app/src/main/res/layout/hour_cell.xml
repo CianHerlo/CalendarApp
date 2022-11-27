@@ -25,6 +25,7 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="1"
+            android:background="@color/purple_200"
             android:gravity="center"
             android:lines="2"
             android:text="Event Name"
@@ -37,9 +38,10 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="1"
+            android:background="@color/purple_200"
             android:gravity="center"
             android:lines="2"
-            android:text=""
+            android:text="Event Name 2"
             android:textColor="?android:attr/colorForeground"
             android:textSize="12sp" />
 
@@ -49,9 +51,10 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="1"
+            android:background="@color/purple_200"
             android:gravity="center"
             android:lines="2"
-            android:text=""
+            android:text="Event Name 3"
             android:textColor="?android:attr/colorForeground"
             android:textSize="12sp" />
 
