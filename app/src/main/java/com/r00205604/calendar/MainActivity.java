@@ -61,35 +61,32 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
 
         CollectionReference usersRef = db.collection("users");
         Query query = usersRef.whereEqualTo("email", Objects.requireNonNull(fireAuth.getCurrentUser()).getEmail());
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (DocumentSnapshot documentSnapshot : task.getResult()) {
-                        String email = documentSnapshot.getString("email");
+        query.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                    String email = documentSnapshot.getString("email");
 
-                        assert email != null;
-                        if (email.equals(fireAuth.getCurrentUser().getEmail())) {
-                            Log.d(TAG, "Welcome Back");
-                            userExists = 1;
-                            break;
-                        }
+                    assert email != null;
+                    if (email.equals(fireAuth.getCurrentUser().getEmail())) {
+                        Log.d(TAG, "Welcome Back");
+                        userExists = 1;
+                        break;
                     }
+                }
 
-                    if (userExists != 1) {
-                        Log.d(TAG, "New User");
-                        Toast.makeText(MainActivity.this, "New User", Toast.LENGTH_SHORT).show();
+                if (userExists != 1) {
+                    Log.d(TAG, "New User");
+                    Toast.makeText(MainActivity.this, "New User", Toast.LENGTH_SHORT).show();
 
-                        // Create a new user with a first and last name
-                        Map<String, Object> user = new HashMap<>();
-                        user.put("email", fireAuth.getCurrentUser().getEmail());
+                    // Create a new user with a first and last name
+                    Map<String, Object> user = new HashMap<>();
+                    user.put("email", fireAuth.getCurrentUser().getEmail());
 
-                        // Add a new document with a generated ID
-                        db.collection("users")
-                                .add(user)
-                                .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()))
-                                .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
-                    }
+                    // Add a new document with a generated ID
+                    db.collection("users")
+                            .add(user)
+                            .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()))
+                            .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
                 }
             }
         });
