@@ -3,7 +3,12 @@ package com.r00205604.calendar;
 import static android.content.ContentValues.TAG;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -78,7 +83,7 @@ public class EventEditActivity extends AppCompatActivity {
                     assert email != null;
                     if (email.equals(fireAuth.getCurrentUser().getEmail())) {
                         String userID = documentSnapshot.getId();
-                        Toast.makeText(EventEditActivity.this, "Time: "+time, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EventEditActivity.this, "Time: " + time, Toast.LENGTH_SHORT).show();
 
                         // Create a new user with a first and last name
                         Map<String, Object> addEvent = new HashMap<>();
@@ -95,7 +100,9 @@ public class EventEditActivity extends AppCompatActivity {
             }
         });
 
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
+
+        Intent intent_return = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent_return);
     }
+
 }
