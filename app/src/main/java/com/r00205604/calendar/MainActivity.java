@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
     private void loadEvents() {
         eventsList.clear();
         CollectionReference usersRef = db.collection("users");
-        Query query = usersRef.whereEqualTo("email", fireAuth.getCurrentUser().getEmail());
+        Query query = usersRef.whereEqualTo("email", Objects.requireNonNull(fireAuth.getCurrentUser()).getEmail());
         query.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 for (DocumentSnapshot documentSnapshot : task.getResult()) {
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
                 }
             }
         });
-    }
+}
 
     private void setMonthView() {
         monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
