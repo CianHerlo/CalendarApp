@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
     private ShakeDetector mShakeDetector;
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
-    private Button logoutBTN;
     FirebaseAuth fireAuth;
     FirebaseFirestore db;
     int userExists = 0;
@@ -67,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         monthYearText = findViewById(R.id.monthYearTV);
         db = FirebaseFirestore.getInstance();
         fireAuth = FirebaseAuth.getInstance();
-        logoutBTN = findViewById(R.id.logoutBTN);
+        Button logoutBTN = findViewById(R.id.logoutBTN);
 
         CalendarUtils.selectedDate = LocalDate.now();
         setMonthView();

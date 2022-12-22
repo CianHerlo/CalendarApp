@@ -1,5 +1,6 @@
 package com.r00205604.calendar;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,17 +24,20 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     @NonNull
     @Override
     public CalendarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.calendar_cell, parent, false);
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-        if(days.size() > 15) {  //month view
+
+        if(days.size() > 15) {
             layoutParams.height = (int) (parent.getHeight() * 0.16);
-        } else {  // week view
+        } else {
             layoutParams.height = (int) parent.getHeight();
         }
         return new CalendarViewHolder(view, onItemListener, days);
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
         final LocalDate date = days.get(position);
@@ -44,10 +48,8 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
             holder.parentView.setBackgroundColor(Color.LTGRAY);
         }
 
-        if(date.getMonth().equals(CalendarUtils.selectedDate.getMonth())) {
-            holder.dayOfMonth.setTextColor(Color.BLACK);
-        } else {
-            holder.dayOfMonth.setTextColor(Color.LTGRAY);
+        if(!date.getMonth().equals(CalendarUtils.selectedDate.getMonth())) {
+            holder.dayOfMonth.setTextColor(Color.parseColor("#6F94FF"));
         }
     }
 
