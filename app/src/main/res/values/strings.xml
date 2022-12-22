@@ -50,4 +50,5 @@
     <!--  Image Descriptions  -->
     <string name="email_image">Image of Email Icon</string>
     <string name="password_image">Image of Password Icon</string>
+    <string name="month_amp_year"><![CDATA[Month & Year]]></string>
 </resources>

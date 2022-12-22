@@ -49,7 +49,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Month &amp; Year"
+            android:text="@string/month_amp_year"
             android:textAlignment="center"
             android:textColor="?android:attr/colorForeground"
             android:textSize="20sp" />
@@ -169,6 +169,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:icon="@drawable/ic_baseline_logout_24"
+            app:iconGravity="textStart"
             app:iconTint="?android:attr/colorForeground"
             tools:ignore="RedundantDescriptionCheck" />
     </LinearLayout>
