@@ -13,12 +13,16 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:contentDescription="@string/monthly_button"
         android:onClick="monthlyAction"
         android:text="@string/monthly"
         android:textColor="?android:attr/colorForeground"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:icon="@drawable/ic_baseline_calendar_month_24"
+        app:iconGravity="textStart"
+        app:iconTint="?android:attr/colorForeground" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -80,14 +84,17 @@
     <Button
         android:id="@+id/NewEventBTN"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:onClick="newEventAction"
         android:text="@string/new_event"
         android:textColor="?android:attr/colorForeground"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:icon="@drawable/ic_baseline_create_24"
+        app:iconGravity="textStart"
+        app:iconTint="?android:attr/colorForeground" />
 
     <ListView
         android:id="@+id/hourListView"

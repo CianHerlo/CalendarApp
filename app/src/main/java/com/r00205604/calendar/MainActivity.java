@@ -21,6 +21,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
     private ShakeDetector mShakeDetector;
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
+    private Button logoutBTN;
     FirebaseAuth fireAuth;
     FirebaseFirestore db;
     int userExists = 0;
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         monthYearText = findViewById(R.id.monthYearTV);
         db = FirebaseFirestore.getInstance();
         fireAuth = FirebaseAuth.getInstance();
+        logoutBTN = findViewById(R.id.logoutBTN);
 
         CalendarUtils.selectedDate = LocalDate.now();
         setMonthView();
@@ -118,7 +121,12 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         });
 
 
-
+        logoutBTN.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            startActivity(intent);
+            finish();
+        });
 
 
     }
