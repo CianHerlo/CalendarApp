@@ -11,6 +11,9 @@ public class CalendarUtils {
     public static LocalDate selectedDate;
 
     public static String formattedDate(LocalDate date) {
+        if (date == null) {
+            return "";
+        }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
         return date.format(formatter);
     }

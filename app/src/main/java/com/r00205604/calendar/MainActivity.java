@@ -3,6 +3,7 @@ package com.r00205604.calendar;
 import static android.content.ContentValues.TAG;
 import static com.r00205604.calendar.CalendarUtils.daysInMonthArray;
 import static com.r00205604.calendar.CalendarUtils.monthYearFromDate;
+import static com.r00205604.calendar.CalendarUtils.selectedDate;
 import static com.r00205604.calendar.Event.eventsList;
 
 import androidx.annotation.NonNull;
@@ -11,7 +12,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -40,6 +46,9 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener {
 
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+    private ShakeDetector mShakeDetector;
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
     FirebaseAuth fireAuth;
@@ -60,6 +69,21 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         CalendarUtils.selectedDate = LocalDate.now();
         setMonthView();
         loadEvents();
+
+
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mShakeDetector = new ShakeDetector();
+
+        mShakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
+            @Override
+            public void onShake() {
+                Intent intent = new Intent(MainActivity.this, EventEditActivity.class);
+                intent.putExtra("selectedDate", CalendarUtils.selectedDate.toString());
+                startActivity(intent);
+            }
+        });
+
 
         CollectionReference usersRef = db.collection("users");
         Query query = usersRef.whereEqualTo("email", Objects.requireNonNull(fireAuth.getCurrentUser()).getEmail());
@@ -163,12 +187,44 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
     {
         startActivity(new Intent(this, WeekViewActivity.class));
     }
+
+
+    private final SensorEventListener mSensorListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            float x = event.values[0];
+            float y = event.values[1];
+            float z = event.values[2];
+
+            float gX = x / SensorManager.GRAVITY_EARTH;
+            float gY = y / SensorManager.GRAVITY_EARTH;
+            float gZ = z / SensorManager.GRAVITY_EARTH;
+
+            // gForce will be close to 1 when there is no movement
+            float gForce = (float) Math.sqrt(gX * gX + gY * gY + gZ * gZ);
+
+            if (gForce > mShakeDetector.getThreshold()) {
+                Context context = getBaseContext();
+                mShakeDetector.onShake(context, selectedDate);
+            }
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        }
+    };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Register the ShakeDetector as a listener for the accelerometer sensor
+        mSensorManager.registerListener(mShakeDetector, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
+    }
+    @Override
+    protected void onPause() {
+        // Unregister the ShakeDetector as a listener for the accelerometer sensor
+        mSensorManager.unregisterListener(mShakeDetector);
+        super.onPause();
+    }
 }
-
-
-
-
-
-
-
 

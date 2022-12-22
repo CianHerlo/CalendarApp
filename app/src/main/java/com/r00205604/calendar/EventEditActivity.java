@@ -34,6 +34,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class EventEditActivity extends AppCompatActivity {
     private EditText eventNameET, eventTimeET;
@@ -74,7 +75,7 @@ public class EventEditActivity extends AppCompatActivity {
         Event.eventsList.add(newEvent);
 
         CollectionReference usersRef = db.collection("users");
-        Query query = usersRef.whereEqualTo("email", fireAuth.getCurrentUser().getEmail());
+        Query query = usersRef.whereEqualTo("email", Objects.requireNonNull(fireAuth.getCurrentUser()).getEmail());
         query.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 for (DocumentSnapshot documentSnapshot : task.getResult()) {
