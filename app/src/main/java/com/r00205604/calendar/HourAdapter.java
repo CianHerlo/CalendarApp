@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HourAdapter extends ArrayAdapter<HourEvent> {
+
+    private TextView event1, event2, event3;
+
     public HourAdapter(@NonNull Context context, List<HourEvent> hourEvents) {
         super(context, 0, hourEvents);
     }
@@ -40,33 +42,39 @@ public class HourAdapter extends ArrayAdapter<HourEvent> {
     }
 
     private void setEvents(View convertView, ArrayList<com.r00205604.calendar.Event> events) {
-        TextView event1 = convertView.findViewById(R.id.event1);
-        TextView event2 = convertView.findViewById(R.id.event2);
-        TextView event3 = convertView.findViewById(R.id.event3);
+        event1 = convertView.findViewById(R.id.event1);
+        event2 = convertView.findViewById(R.id.event2);
+        event3 = convertView.findViewById(R.id.event3);
 
-        if(events.size() == 0) {
-            hideEvent(event1);
-            hideEvent(event2);
-            hideEvent(event3);
-        } else if(events.size() == 1) {
-            setEvent(event1, events.get(0));
-            hideEvent(event2);
-            hideEvent(event3);
-        } else if(events.size() == 2) {
-            setEvent(event1, events.get(0));
-            setEvent(event2, events.get(1));
-            hideEvent(event3);
-        } else if(events.size() == 3) {
-            setEvent(event1, events.get(0));
-            setEvent(event2, events.get(1));
-            setEvent(event3, events.get(2));
-        } else {
-            setEvent(event1, events.get(0));
-            setEvent(event2, events.get(1));
-            event3.setVisibility(View.VISIBLE);
-            String eventsNotShown = String.valueOf(events.size() - 2);
-            eventsNotShown += " More Events";
-            event3.setText(eventsNotShown);
+        switch (events.size()) {
+            case 0:
+                hideEvent(event1);
+                hideEvent(event2);
+                hideEvent(event3);
+                break;
+            case 1:
+                setEvent(event1, events.get(0));
+                hideEvent(event2);
+                hideEvent(event3);
+                break;
+            case 2:
+                setEvent(event1, events.get(0));
+                setEvent(event2, events.get(1));
+                hideEvent(event3);
+                break;
+            case 3:
+                setEvent(event1, events.get(0));
+                setEvent(event2, events.get(1));
+                setEvent(event3, events.get(2));
+                break;
+            default:
+                setEvent(event1, events.get(0));
+                setEvent(event2, events.get(1));
+                event3.setVisibility(View.VISIBLE);
+                String eventsNotShown = String.valueOf(events.size() - 2);
+                eventsNotShown += "+ Events";
+                event3.setText(eventsNotShown);
+                break;
         }
     }
 
@@ -75,8 +83,8 @@ public class HourAdapter extends ArrayAdapter<HourEvent> {
         textView.setVisibility(View.VISIBLE);
     }
 
-    private void hideEvent(TextView tv) {
-        tv.setVisibility(View.INVISIBLE);
+    private void hideEvent(TextView textView) {
+        textView.setVisibility(View.INVISIBLE);
     }
 
 }

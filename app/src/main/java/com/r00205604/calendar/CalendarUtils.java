@@ -68,6 +68,7 @@ public class CalendarUtils {
     public static ArrayList<LocalDate> daysInWeekArray(LocalDate selectedDate) {
         ArrayList<LocalDate> days = new ArrayList<>();
         LocalDate current = sundayForDate(selectedDate);
+        assert current != null;
         LocalDate endDate = current.plusWeeks(1);
 
         while (current.isBefore(endDate)) {
