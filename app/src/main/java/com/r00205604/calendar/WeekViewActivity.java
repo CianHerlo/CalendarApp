@@ -2,6 +2,7 @@ package com.r00205604.calendar;
 
 import static com.r00205604.calendar.CalendarUtils.daysInWeekArray;
 import static com.r00205604.calendar.CalendarUtils.monthYearFromDate;
+import static com.r00205604.calendar.CalendarUtils.selectedDate;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -74,11 +75,13 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
 
     public void newEventAction(View view) {
         Intent intent = new Intent(this, EventEditActivity.class);
+        intent.putExtra("selectedDate", selectedDate);
         startActivity(intent);
     }
 
     public void dailyAction(View view) {
         Intent intent = new Intent(this, DailyCalendarActivity.class);
+        intent.putExtra("selectedDate", selectedDate);
         startActivity(intent);
     }
 }

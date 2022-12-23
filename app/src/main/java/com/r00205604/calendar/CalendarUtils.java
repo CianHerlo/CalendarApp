@@ -18,6 +18,14 @@ public class CalendarUtils {
         return date.format(formatter);
     }
 
+    public static String formattedDateDatabase(LocalDate date) {
+        if (date == null) {
+            return "";
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return date.format(formatter);
+    }
+
     public static String formattedTime(LocalTime time) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
         return time.format(formatter);

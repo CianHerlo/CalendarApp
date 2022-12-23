@@ -49,7 +49,7 @@ public class Login extends AppCompatActivity {
 
             fireAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    Toast.makeText(Login.this, "Welcome Back "+email, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(Login.this, "Welcome Back "+email, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                 } else {

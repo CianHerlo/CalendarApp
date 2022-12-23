@@ -19,13 +19,20 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 public class EventEditActivity extends AppCompatActivity {
+
+    private static final String TAG = "EventEditActivity";
     private EditText eventNameET, eventTimeET;
+    private TextView eventDateTV;
+    private String eventDate;
     FirebaseAuth fireAuth = FirebaseAuth.getInstance();
 
     @SuppressLint("SetTextI18n")
@@ -35,9 +42,10 @@ public class EventEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event_edit);
 
         eventNameET = findViewById(R.id.eventNameET);
-        TextView eventDateTV = findViewById(R.id.eventDateTV);
+        eventDateTV = findViewById(R.id.eventDateTV);
         eventTimeET = findViewById(R.id.eventTimeET);
 
+        eventDate = CalendarUtils.formattedDateDatabase(CalendarUtils.selectedDate);
         eventDateTV.setText("Selected Date: " + CalendarUtils.formattedDate(CalendarUtils.selectedDate));
     }
 
@@ -72,12 +80,11 @@ public class EventEditActivity extends AppCompatActivity {
                     assert email != null;
                     if (email.equals(fireAuth.getCurrentUser().getEmail())) {
                         String userID = documentSnapshot.getId();
-                        Toast.makeText(EventEditActivity.this, "Time: " + time, Toast.LENGTH_SHORT).show();
 
                         // Create a new user with a first and last name
                         Map<String, Object> addEvent = new HashMap<>();
                         addEvent.put("title", eventName);
-                        addEvent.put("date", CalendarUtils.selectedDate.toString());
+                        addEvent.put("date", eventDate);
                         addEvent.put("time", time);
 
                         db.collection("users").document(userID).collection("events")
